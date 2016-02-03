@@ -1,0 +1,41 @@
+<div ng-include="'components/shared/Header/header.html'"></div>
+
+    <!--<div class="container">-->
+        <!--<h3>Patient Portal</h3>-->
+    <!--</div>-->
+
+    <!--<div class="container">-->
+        <!--<h3>Hi {{userName}},</h3>-->
+    <!--</div>-->
+
+    <div class="container patient-body">
+            <br>
+        <br>
+        <div ng-include="'components/shared/Adherence/adheranceView.html'"></div>
+
+    </div>
+
+
+
+<style>
+
+    .patient-body{
+        max-width: 1000px;
+    }
+
+    .bottom-img {
+        margin: 0 auto;
+        display: block;
+    }
+
+    .bottom-text {
+        text-align: center;
+    }
+
+    .main-background {
+        background-image: url(img/blur-web-bg.jpg)  !important;
+        background-repeat: no-repeat;
+        background-size: cover !important;
+    }
+
+</style>

@@ -1,0 +1,213 @@
+<div ng-include="'components/shared/Header/header.html'"></div>
+<br><br>
+
+<div class="container">
+
+    <div class="center-block" style="width:50%">
+
+        <div class="header-background">
+
+            <ul class="ul-header">
+                <li ng-repeat="item in menuItems" class="li-header" ng-class="{'active': item.id == states.activeItem}" ng-click="states.activeItem=item.id; updateSubmitButton(item.title);">{{item.title}}</li>
+            </ul>
+        </div>
+
+        <br>
+
+        <div class="panel-body">
+
+            <div class="header-image">
+
+                <img src="img/login_banner.png" alt="Header" >
+
+            </div>
+
+            <div class="login-content">
+
+
+            <ng-input theme='hoshi' label='Email Address' ng-model='data.emailAddress'></ng-input>
+            <br>
+            <ng-input theme='hoshi' type="password" label='Password' ng-model='data.password'></ng-input>
+            <br>
+            <span class="rememberme">
+            <input type="checkbox" class="large" checked="checked" ng-model="data.rememberMe"/>
+            <span class="textFont"> Remember Me</span>
+            </span>
+                <br><br>
+                <!--  btn btn-lg center-block -->
+                <button class="btn btn-lg center-block login-button" ng-click="login();">{{loginButtonText}}</button>
+                </div>
+            <!--<div class="login-register-content">
+                Or create a new Account | <a href="#"> Register</a>
+            </div>-->
+            <br>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<style>
+
+    .no-left-margin{
+        margin-left: 0px !important;
+    }
+
+    .panel-body{
+        opacity: 0.9;
+        filter: alpha(opacity=90);
+        background: #FFFFFF;
+        padding-top: 0%;
+        padding-right: 0%;
+        padding-left: 0%;
+        padding-bottom: 0%;
+        box-shadow: 2px 2px 1px #999999;
+        border-radius: 02px;
+    }
+
+    .login-content{
+        padding-right: 10%;
+        padding-left: 10%;
+    }
+
+    li.active{
+        color: #00aaff;
+        border: 0;
+    }
+
+
+    .no-display{
+        display: none;
+    }
+
+
+    .centerDiv{
+        max-width: 600px;
+        padding-top: 15%;
+    }
+
+    .rememberme{
+        float: left;
+        padding-left: 5%;
+    }
+
+    .btnstyle{
+        background-color:#3c8dbc;
+        width:40%;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #595F6E;
+    }
+
+
+
+    .textFont{
+        font-weight: bold;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #595F6E;
+    }
+
+
+    .header-background{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 25px;
+        padding-right: 25px;
+        background: #FFFFFF;
+        text-align: center;
+        opacity: 0.7;
+        filter: alpha(opacity=70);
+        box-shadow: 2px 2px 1px #999999;
+        border-radius: 02px;
+    }
+
+    .header-image{
+        overflow:hidden;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .header-image img{
+        width: 100%;
+    }
+
+    .login-button{
+        background-color: #00aaff;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 8%;
+        padding-right: 8%;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #FFFFFF;
+        border-radius: 20px;
+        border: 0;
+        outline:none !important;
+        margin-bottom: 10px;
+    }
+
+    .ul-header{
+        text-align:center;
+        list-style-type: none;
+        margin: 0;
+        padding: 0%;
+        white-space: nowrap;
+    }
+
+    .li-header {
+        margin-right: 15px;
+        margin-left: 15px;
+        font-weight: bold;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-align: center;
+        color: #7F8994;
+        outline:none;
+        display: inline;
+    }
+
+    .login-register-content{
+        text-align: center;
+
+    }
+
+    .main-background {
+        background-image: url(img/blur-web-bg.jpg)  !important;
+        background-repeat: no-repeat;
+        background-size: cover !important;
+    }
+
+
+
+</style>
+
+
+
+
+<!--
+<div class="center-block centerDiv">
+
+    <div class="col-md-6">
+
+        <br>
+        <ng-input theme='hoshi' label='Email Address' ng-model='data.emailAddress'></ng-input>
+        <br>
+        <ng-input theme='hoshi' type="password" label='Password' ng-model='data.password'></ng-input>
+
+
+        <input type="checkbox" class="large" checked="checked" ng-model="data.rememberMe"/> Remember Me<br><br>
+
+        <button class="btn btn-default" ng-click="login();">Login</button>
+
+    </div>
+    <div class="col-md-6">
+        <br>
+        <button class="btn btn-default" ng-click="register();">Register</button>
+    </div>
+
+</div>
+
+-->

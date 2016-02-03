@@ -1,0 +1,144 @@
+<div class="control-bar">
+    <div class="col-lg-6 col-md-6 col-sm-3">
+        <img src="img/profile_pic.png" class="img-circle pull-left" alt="Profile Pic" width="45px" height="45px">
+    </div>
+    <div class="control-buttons">
+    <div ng-if="!viewAdherenceDetails" class="col-lg-2 col-md-2 col-sm-3" ng-click="showDetails('adherence')">
+        <div class="pull-right">
+            <img src="img/pill.png" class="bottom-img" alt="Profile Pic" width="30px" height="30px">
+            <span class="text-color-gray bottom-text">Adherence</span>
+        </div>
+    </div>
+    <div ng-if="viewAdherenceDetails" class="col-lg-2 col-md-2 col-sm-3">
+        <div class="pull-right">
+            <img src="img/pill-hover.png" class="bottom-img" alt="Profile Pic" width="30px" height="30px">
+            <span class="text-color-gray bottom-text">Adherence</span>
+        </div>
+    </div>
+
+    <div ng-if="!viewActivityDetails" class="col-lg-2 col-md-2 col-sm-3" ng-click="showDetails('activities')">
+        <div class="pull-right">
+            <img src="img/activities.png" class="bottom-img" alt="Profile Pic" width="30px" height="30px">
+            <span class="text-color-gray bottom-text">Activities</span>
+        </div>
+    </div>
+    <div ng-if="viewActivityDetails" class="col-lg-2 col-md-2 col-sm-3">
+        <div class="pull-right">
+            <img src="img/activities-hover.png" class="bottom-img" alt="Profile Pic" width="30px" height="30px">
+            <span class="text-color-gray bottom-text">Activities</span>
+        </div>
+    </div>
+
+    <div ng-if="!viewAlertDetails" class="col-lg-2 col-md-2 col-sm-3" ng-click="showDetails('alerts')">
+        <div class="pull-right">
+            <img src="img/alert.png" class="bottom-img" alt="Profile Pic" width="30px" height="30px">
+            <span class="text-color-gray bottom-text">Alerts</span>
+        </div>
+    </div>
+    <div ng-if="viewAlertDetails" class="col-lg-2 col-md-2 col-sm-3">
+        <div class="pull-right">
+            <img src="img/alert-hover.png"  class="bottom-img" alt="Profile Pic" width="30px" height="30px">
+            <span class="text-color-gray bottom-text">Alerts</span>
+        </div>
+    </div>
+    </div>
+</div>
+<br>
+<div class="bg-white">
+    <div class="col-lg-4 col-md-4 col-sm-12 medication-details">
+        <div class="row margin-20">
+            <h2><span id="calender-day" class="text-color-white">{{selectedDate | date:'EEEE'}}</span> <span id="calender-date" class="pull-right text-color-white">{{selectedDate | date:'dd | MMM'}}</span></h2>
+            <hr>
+        </div>
+
+        <div ng-if="viewAdherenceDetails">
+
+            <div class="row margin-20" ng-if="!data.patientAdherence.dailyAdherence">
+                <h4><span class="text-color-white">No medication found.</span></h4>
+
+            </div>
+            <div ng-repeat="adherence in data.patientAdherence.dailyAdherence">
+                <div ng-if="adherence.medications && adherence.medications.length > 0" class="panel panel-primary panel-margin-top" ng-class="adherence.adherenceLevel">
+                    <div class="panel-heading" ng-click="collapsSection(adherence.time);">
+                        {{adherence.time}}
+                        <img ng-if="adherence.time === 'Morning'" src="img/morning.png" class="img-circle pull-right" alt="Success Pic" width="25" height="25">
+                        <img ng-if="adherence.time === 'Noon'" src="img/afternoon.png" class="img-circle pull-right" alt="Profile Pic" width="25" height="25">
+                        <img ng-if="adherence.time === 'Evening'" src="img/evening.png" class="img-circle pull-right" alt="Success Pic" width="25" height="25">
+                        <img ng-if="adherence.time === 'Bedtime'" src="img/night.png" class="img-circle pull-right" alt="Profile Pic" width="25" height="25">
+                    </div>
+                    <div ng-if="adherence.time === 'Morning'" class="panel-body" collapse="isCollapsedMorning">
+                        <div ng-repeat="medication in adherence.medications">
+                            <p class="medication-drug">{{medication.drug}} <span class="pull-right"><b>X</b> {{medication.quantity}}</span></p>
+                            <p class="drug-description">{{medication.description}}</p>
+                        </div>
+                    </div>
+                    <div ng-if="adherence.time === 'Noon'" class="panel-body" collapse="isCollapsedNoon">
+                        <div ng-repeat="medication in adherence.medications">
+                            <p class="medication-drug">{{medication.drug}} <span class="pull-right"><b>X</b> {{medication.quantity}}</span></p>
+                            <p class="drug-description">{{medication.description}}</p>
+                        </div>
+                    </div>
+                    <div ng-if="adherence.time === 'Evening'" class="panel-body" collapse="isCollapsedEvening">
+                        <div ng-repeat="medication in adherence.medications">
+                            <p class="medication-drug">{{medication.drug}} <span class="pull-right"><b>X</b> {{medication.quantity}}</span></p>
+                            <p class="drug-description">{{medication.description}}</p>
+                        </div>
+                    </div>
+                    <div ng-if="adherence.time === 'Bedtime'" class="panel-body" collapse="isCollapsedBedtime">
+                        <div ng-repeat="medication in adherence.medications">
+                            <p class="medication-drug">{{medication.drug}} <span class="pull-right"><b>X</b> {{medication.quantity}}</span></p>
+                            <p class="drug-description">{{medication.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="viewActivityDetails">
+            <div ng-repeat="activity in data.patientActivities.activities" class="row margin-20">
+                <h4><span class="text-color-white">{{activity.message}}</span></h4>
+                <p><span class="text-color-white pull-right">{{activity.time}}</span></p>
+            </div>
+            <div ng-if="!data.patientActivities.activities" class="row margin-20">
+                <h4><span class="text-color-white">No activities found.</span></h4>
+            </div>
+        </div>
+
+        <div ng-if="viewAlertDetails">
+            <div ng-repeat="aNotification in data.patientNotifications.notifications" class="row margin-20">
+                <h4><span class="text-color-white">{{aNotification.notification.message}}</span></h4>
+            </div>
+            <div ng-if="!data.patientNotifications.notifications" class="row margin-20">
+                <h4><span class="text-color-white">No alert found.</span></h4>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-8 col-md-8 col-sm-12 bg-white">
+        <div class="padding-left-right-20">
+            <h2 id="calender-header" class="text-color-gray">Adherence Summary</h2>
+            <hr style="height:1px;border:none;color:#95a0aa;background-color:#95a0aa;" />
+        </div>
+        <div class="panel-body">
+            <div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    #calender-header{
+        font-size: 1.6em;
+    }
+    #calender-day{
+        font-size: 0.8em;
+    }
+    #calender-date{
+        font-size: 0.6em;
+    }
+
+    .text-color{
+        font-weight: bold;
+    }
+</style>

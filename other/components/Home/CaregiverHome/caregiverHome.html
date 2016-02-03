@@ -1,0 +1,80 @@
+<div ng-include="'components/shared/Header/header.html'"></div>
+<div class="container caregiver-body">
+
+    <div class="row">
+
+
+        <br>
+
+        <data-owl-carousel class="owl-carousel" data-options="{navigation: true, pagination: false, rewindNav: false}">
+            <div owl-carousel-item="" ng-repeat="patient in data.patients" class="item">
+
+                <md-card class="card" data="{{patient.index}}" ng-click="showMedicationDetails(patient.index)">
+                    <md-card-content class="padding0" style="height:180px;">
+                        <div ng-class="{ 'top-div': !patient.isSelected, 'top-div-selected': patient.isSelected}">
+                            <div style="height: 10px;"></div>
+                            <div class="container" style="width:255px;">
+                                <div class="row  padding0">
+                                    <div class="card-outer">
+                                        <div class="col-md-12 padding0">
+                                            <div class="col-md-3 padding0"><img src="img/profile_pic.png" class="img-circle"
+                                                                                alt="Profile Pic" width="60" height="60">
+                                            </div>
+                                            <div class="col-md-9 padding0"><h2 class="md-title patient-name-left" ng-class="{ 'patient-card-textcolor': !patient.isSelected, 'patient-card-textcolor-selected': patient.isSelected}">
+                                                {{patient.firstName + " " + patient.lastName}}</h2></div>
+                                        </div>
+
+                                        <div class="col-md-12  padding0" style="height: 50px;">
+
+                                            <div class="col-md-9  padding0 "  style="top:23%;"><span ng-class="{ 'patient-card-textcolor': !patient.isSelected, 'patient-card-textcolor-selected': patient.isSelected}">{{patient.activity}}</span></div>
+                                            <div class="col-md-3  padding0 " style="top:23%;"><span ng-class="{ 'patient-card-textcolor': !patient.isSelected, 'patient-card-textcolor-selected': patient.isSelected}" class="pull-right">{{patient.time}}</span></div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="line"></div>
+
+                        <div class="col-md-12  padding0" style="top:5px">
+
+                            <img src="img/{{patient.deviceStatusImg}}.png" class="bottom-img" alt="Pill Pic" width="20"
+                                 height="20">
+
+                            <p class="bottom-text"><span class="text-color-gray">Device Status</span></p>
+
+                        </div>
+
+
+                    </md-card-content>
+                </md-card>
+
+            </div>
+        </data-owl-carousel>
+
+    </div>
+
+</div>
+<br>
+
+
+
+<div ng-if="showCalenderView" class="container caregiver-body">
+
+    <div ng-include="'components/shared/Adherence/adheranceView.html'"></div>
+
+</div>
+
+<style>
+
+    .main-background {
+        background-image: url(img/blur-web-bg.jpg)  !important;
+        background-repeat: no-repeat;
+        background-size: cover !important;
+    }
+
+</style>
+
+

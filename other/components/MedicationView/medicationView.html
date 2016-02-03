@@ -1,0 +1,155 @@
+<div ng-if="showLoading" class="load-bar">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+<div class="container">
+
+    <h3>Pharmacist Portal</h3><br>
+
+    <h4>Please review the medication schedule below.</h4><br>
+
+    <br>
+
+    <div ng-if="viewPatientDetail" class="col-md-12" style="padding-bottom:40px">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <h4>Patient</h4> <br>
+                <div class="col-md-4 col-md-offset-1">
+
+                    <h3>Name : <span class="label label-default">{{patientMedicationDetails.patientDetails.patientName}}</span></h3>
+                    <br>
+
+                    <h4>Address :</h4>
+
+                    <h4><span class="label label-default">{{patientMedicationDetails.patientDetails.streetName}}</span></h4>
+
+                    <h4><span class="label label-default">{{patientMedicationDetails.patientDetails.city}}</span></h4>
+
+                    <h4><span class="label label-default">{{patientMedicationDetails.patientDetails.state}}</span></h4>
+
+                    <h4><span class="label label-default">{{patientMedicationDetails.patientDetails.zipCode}}</span></h4>
+
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <h4>Date : <span class="label label-default">{{patientMedicationDetails.patientDetails.patientDob | date:'dd-MM-yyyy'}}</span></h4>
+                    <br>
+
+                    <h4>Phone Number : <span class="label label-default">{{patientMedicationDetails.patientDetails.patientPhone}}</span></h4>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <span class=""><img src="img/profile_pic.png" class="img-circle pull-right" alt="Profile Pic"
+                                        width="180" height="180">
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div ng-if="viewPatientCaregiversList" class="col-md-12">
+        <div class="col-md-12">
+            <h4>Caregivers</h4> <br>
+            <div class="list-group col-md-6 col-md-offset-1">
+                <div ng-repeat="email in patientMedicationDetails.patientCaregiversList" class="list-group-item">
+                    <span class="glyphicon glyphicon-ok"></span> {{email}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div ng-if="viewPatientDeviceList" class="col-md-12">
+        <div class="col-lg-12">
+            <h4>Devices</h4> <br>
+            <div class="list-group col-md-6 col-md-offset-1">
+                <div ng-repeat="device in patientMedicationDetails.patientDevices" class="list-group-item">
+                    <span class="glyphicon glyphicon-ok"></span> {{device.deviceType}} ({{device.macAddress}})
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+
+    <div class="row">
+        <div ng-repeat="blister in data.blisters" class="col-md-3 div-padding-2">
+            <div ng-class="blister.time">
+                <div ng-if="!blister.skip">
+                    <div class="row div-margin-5">
+                        <b class="patient-name">{{patientName}}</b>
+                    </div>
+                    <div class="row div-margin-5">
+                        <b>{{blister.date}}</b>
+                        <b style="float:right">{{blister.time}}</b>
+                    </div>
+                    <div ng-repeat="medication in blister.medications" class="row div-margin-5">
+                        {{medication.quantity}} {{medication.drug}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div align="right" class="row">
+        <button class="btn btn-lg" ng-click="submit();">Done
+            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button>
+    </div>
+
+
+    <br><br><br>
+
+</div>
+
+
+<style>
+    .div-display-inline {
+        display: inline-block;
+    }
+
+    .patient-name {
+        font-size: 18px;
+    }
+
+    .Morning {
+        background-color: #FFFF00;
+        height: 150px;
+    }
+
+    .Noon {
+        background-color: #E0E0E0;
+        height: 150px;
+    }
+
+    .Evening {
+        background-color: #FF9900;
+        height: 150px;
+    }
+
+    .Bedtime {
+        background-color: #30B5EF;
+        height: 150px;
+    }
+
+    .div-padding-2 {
+        padding: 2px;
+    }
+
+    .div-margin-5 {
+        margin: 5px;
+    }
+
+    .no-left-margin {
+        margin-left: 0px !important;
+    }
+
+</style>

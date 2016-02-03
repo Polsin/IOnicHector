@@ -1,0 +1,164 @@
+<div ng-include="'components/shared/Header/header.html'"></div>
+
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12"></div>
+
+    </div>
+
+
+</div>
+
+
+<div class="container">
+    <br>
+
+    <div class="panel panel-default center-block" style="width:80%">
+        <br>
+        <div class="panel-heading">
+            <center><h3 class="panel-title ">{{userType}} Registration</h3></center>
+        </div>
+        <div class="panel-body k-content">
+
+                <form role="form">
+
+                    <div class="row">
+
+                    <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label for="fname">Name:</label>
+                        <input type="text" class="form-control" id="fname" placeholder="First Name" ng-model="data.fname">
+                        <br>
+                        <input type="text" class="form-control" id="lname" placeholder="Last Name" ng-model="data.lname">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usr">Email:</label>
+                        <input type="email" class="form-control" id="usr" ng-model="data.email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" id="pwd" ng-model="data.password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cfmpwd">Confirm Password:</label>
+                        <input type="password" class="form-control" id="cfmpwd" ng-model="data.passwordConfirm">
+                    </div>
+
+
+                        <div class="form-group k-content">
+                            <label for="dob">Date of Birth:</label>
+                            <input id="datepicker" value="1990-01-01" id="dob" style="width: 100%;" ng-model="data.dob">
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+
+
+
+                    <div class="form-group">
+                        <label for="phn">Phone Number:</label>
+                        <input type="text" class="form-control" id="phn" ng-model="data.phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sel1">Gender:</label>
+                        <select class="form-control" id="sel1" ng-model="data.gender">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="addstnm">Address:</label>
+                        <input type="text" class="form-control" id="addstnm" placeholder="Street Name"
+                               ng-model="data.stName">
+                        <br>
+                        <input type="text" class="form-control" id="addcity" placeholder="City" ng-model="data.city">
+                        <br>
+                        <input type="text" class="form-control" id="addstate" placeholder="State" ng-model="data.state">
+                        <br>
+                        <input type="text" class="form-control" id="addzip" placeholder="Zip Code" ng-model="data.zip">
+                        <br>
+                        <input type="text" class="form-control" id="addcountry" placeholder="Country"
+                               ng-model="data.country">
+                    </div>
+
+                    </div>
+                    </div>
+                    <br>
+                    <button type="button" class="btn   center-block register-button" ng-click="register();">Submit</button>
+                    <br>
+
+                </form>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+    .main-background {
+        background-image: url(img/extra_bg.jpg)  !important;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+    }
+
+    .panel{
+        max-width: 850px;
+        opacity: 0.9;
+        filter: alpha(opacity=90);
+        box-shadow: 2px 2px 1px #999999;
+        border-radius: 05px;
+    }
+
+
+    .register-button{
+        background-color: #00aaff;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        padding-left: 15%;
+        padding-right: 15%;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #FFFFFF;
+        border-radius: 2px;
+        border: 0;
+        outline:none !important;
+    }
+
+    .panel-title{
+        color: #95A0AA;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    </style>
+
+
+<script>
+    $(document).ready(function() {
+
+        // create DatePicker from input HTML element
+        $("#datepicker").kendoDatePicker({
+            format : "yyyy-MM-dd"
+        });
+
+    });
+</script>
+
+
+
+

@@ -1,0 +1,259 @@
+<div ng-include="'components/shared/Header/header.html'"></div>
+
+
+<br><br>
+
+<div ng-if="true" class="container container-pat-device-info">
+    <div class="col-lg-8 col-md-8 col-sm-12">
+
+        <div class="col-lg-8 col-md-8 col-sm-12">
+
+            <!--<div class="input-group input-group-lg">
+                <input  type="text" class="form-control" placeholder="Search by MAC Address" ng-model="query">
+            <span class="input-group-addon" id="sizing-addon1" ng-click="search()">
+                <img src="img/imagesSearch.png" height="18px" class="img-rounded pull-right"
+                     alt="Profile Pic">
+            </span>
+            </div>-->
+
+
+            <div class="input-group input-group-lg div-search">
+                <input class="input-search" type="text" placeholder="Search by MAC Address" ng-model="query">
+
+                <span  id="sizing-addon1" ng-click="search()">
+                <img src="img/imagesSearch.png" height="18px" class="img-rounded pull-right"
+                     alt="Profile Pic">
+            </span>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 border-right-2">
+            <div class="tbl-container">
+                <br>
+
+                <table class="table" >
+                    <thead class="tbl-header">
+                    <tr>
+                        <td>Mac Address</td>
+                        <td>Type</td>
+
+                        <td>Status</td>
+                        <td></td>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="tbl-body-tr" dir-paginate="device in data.patientDeviceList | filter: query |itemsPerPage:5">
+                        <td>{{device.macAddress}}</td>
+                        <td>{{device.deviceTypeString}}</td>
+
+                        <td ng-if="device.active">
+                            <img src="img/signal-green.png" height="25px" class="img-rounded"  alt="Pic">
+                        </td>
+                        <td ng-if="!device.active">
+                            <img src="img/signal-red.png" height="25px" class="img-rounded" alt="Pic">
+                        </td>
+
+                        <td>
+                            <button class="btn  btn-device-remove" ng-click="removeDevice(device.macAddress ,device.deviceType)">Disable</button>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <dir-pagination-controls
+                        class="dir-pagination-controls"
+                        max-size="5"
+                        direction-links="true"
+                        boundary-links="true" >
+                </dir-pagination-controls>
+
+
+                <div ng-if="!data.patientDeviceList || data.patientDeviceList.length === 0">
+
+                    <div class="div-no-devices">
+                        <p>No devices available</p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="row">
+            <h3 class="content-title">Add a Device</h3>
+        </div>
+        <br>
+        <div class="row">
+            <select placeholder="Device Type" class="form-control select-devices" id="sel1" ng-model="data.deviceType" >
+                <option value="" disabled selected hidden>Device Type</option>
+                <option value="smart-communicator">smart-communicator</option>
+                <option value="not-available">diabetes-glucose-monitor</option>
+                <option value="not-available">blood-pressure-monitor</option>
+                <option value="not-available">heart-rate-monitor</option>
+                <option value="not-available">pulse-monitor</option>
+            </select>
+        </div>
+        <br>
+        <div class="row">
+            <input placeholder="MAC Address" type="text" class="form-control" id="macAddress" ng-model="data.macAddress">
+        </div>
+        <br><br>
+        <div class="row">
+            <div>
+                <button class="btn btn-lg center-block btn-device-add" ng-click="addDevice();">Add Device</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+
+<style>
+    .container{
+        max-width: 850px;
+        opacity: 0.9;
+        filter: alpha(opacity=90);
+        box-shadow: 2px 2px 1px #999999;
+        border-radius: 05px;
+    }
+
+    .border-right-2{
+    border-right: 1px solid #9d9d9d;
+    }
+
+    .radio-device-type{
+    margin-top: 15px !important;
+    margin-right: 10px !important;
+    }
+    .no-display{
+    display: none;
+    }
+
+    .detail-title{
+    /*font-weight: bold;*/
+    color:#95a0aa;
+    }
+
+    .caregiver-add-text{
+    margin: 20px;
+    }
+
+    .patient-picture{
+    margin: 20px;
+    }
+
+    .btn-caregiver-add{
+    background-color: #FF9900;
+    color: white;
+    }
+
+    .container-pat-details{
+    background-color: white !important;
+    padding: 20px !important;
+    }
+
+    .container-pat-device-info{
+    background-color: white !important;
+    padding: 20px !important;
+    }
+
+    .tbl-container{
+        text-align: center;
+        padding: 0px 20px 0px 0px;
+    }
+
+    .tbl-header{
+        background-color: #30B5EF !important;
+        color: white;
+        font-weight: bold;
+
+    }
+
+    .content-title{
+    color: #30B5EF;
+    }
+
+    .tbl-body-tr {
+    border-bottom: 1px solid #E0E0E0;
+    color: #95a0aa;
+    }
+
+    .btn-device-add{
+    background-color: #9900BF;
+    color: white;
+    }
+
+    .btn-device-add:focus{
+        color: #30B5Ef;
+    }
+
+    .btn-device-add:hover{
+        color: #30B5Ef;
+    }
+
+    .btn-device-remove{
+        background-color: #AA0000;
+        color: white;
+    }
+
+    .btn-device-remove:focus{
+        color: #000000;
+    }
+
+    .btn-device-remove:hover{
+        color: #000000;
+    }
+
+
+    .input-search {
+        border: 0;
+        outline: 0;
+        background: transparent;
+        width: 200px;
+    }
+
+    .ing-search{
+        padding-left: -30px;
+
+    }
+
+    .div-search{
+        border-bottom: 1px solid #95a0aa;
+        padding-right: 05px;
+        opacity: 0.5;
+    }
+
+
+
+    .select-devices{
+        /*border-radius: 0px;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        border-bottom: 1px solid #95a0aa;*/
+    }
+
+    .main-background {
+        background-image: url(img/blur-web-bg.jpg)  !important;
+        background-repeat: no-repeat;
+        background-size: cover !important;
+    }
+
+    .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+
+        background-color: #30b5ef;
+        /*border-color: #ededed;*/
+    }
+
+
+
+</style>
+

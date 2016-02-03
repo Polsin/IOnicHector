@@ -1,0 +1,59 @@
+<div class="container">
+
+    <div class="col-md-8">
+
+        <h4>Vendor Portal</h4><br>
+
+        <input type="text" name="macAddress" placeholder="MAC Address" ng-model="data.macAddress"><br>
+
+        <input id="selectedDate" ng-model="data.selectedDate" />
+
+    </div>
+    <div class="col-md-4">
+        <button ng-click="logout();">Logout</button><br>
+        <button ng-click="deviceSearch();">Add Device</button>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <table class="table" ts-wrapper>
+        <thead>
+        <tr>
+            <th ts-criteria="Id">MAC Address</th>
+            <th ts-criteria="Name|lowercase" ts-default>Type</th>
+            <th ts-criteria="Price|parseFloat">Assign to</th>
+            <th ts-criteria="Quantity|parseInt">Last ping</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items | limitTo: 10" ts-repeat>
+            <td>{{item.macAddress}}</td>
+            <td>{{item.type}}</td>
+            <td>{{item.assignTo}}</td>
+            <td>{{item.lastPing}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+<script>
+    $("#selectedDate").kendoDatePicker({
+        format: "MMMM dd, yyyy",
+        animation: {
+            close: {
+                effects: "fadeOut zoom:out",
+                duration: 300
+            },
+            open: {
+                effects: "fadeIn zoom:in",
+                duration: 300
+            }
+        }
+    });
+</script>

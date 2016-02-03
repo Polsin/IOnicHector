@@ -1,0 +1,362 @@
+<div ng-include="'components/shared/Header/header.html'"></div>
+<br><br>
+
+<div class="container control-bar">
+    <div class="col-lg-6 col-md-6 col-sm-8">
+        <div class="input-group input-group-lg">
+            <form ng-submit="search()">
+                <input type="text" class="form-control search-text" name="patientId" placeholder="Enter patient ID" ng-model="data.patientId">
+            </form>
+            <span class="input-group-addon" id="sizing-addon1" ng-click="search()">
+                <img src="img/search_hover.png" height="25px" class="img-rounded pull-right"
+                     alt="Profile Pic">
+            </span>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-0">
+    </div>
+
+    <!--<div ng-if="!viewPatientDetails" class="col-lg-2 col-md-2 col-sm-2" ng-click="showDetails('patient')">
+        <div class="pull-right">
+            <img src="img/activities.png" alt="Profile Pic" width="30px" height="30px">
+            <br><span class="text-color-gray">Patient</span>
+        </div>
+    </div>
+    <div ng-if="viewPatientDetails" class="col-lg-2 col-md-2 col-sm-2">
+        <div class="pull-right">
+            <img src="img/activities-hover.png" alt="Profile Pic" width="30px" height="30px">
+            <br><span class="text-color-gray">Patient</span>
+        </div>
+    </div>-->
+
+    <!--<div ng-if="!viewAdherenceDetails" class="col-lg-2 col-md-2 col-sm-2" ng-click="showDetails('adherence')">
+        <div class="pull-right">
+            <img src="img/pill.png" alt="Profile Pic" width="30px" height="30px">
+            <br><span class="text-color-gray">Adherence</span>
+        </div>
+    </div>
+    <div ng-if="viewAdherenceDetails" class="col-lg-2 col-md-2 col-sm-2">
+        <div class="pull-right">
+            <img src="img/pill-hover.png" alt="Profile Pic" width="30px" height="30px">
+            <br><span class="text-color-gray">Adherence</span>
+        </div>
+    </div>-->
+
+</div>
+
+<br>
+
+<div ng-if="isDetailView" class="container container-pat-details">
+    <div class="col-lg-8 col-md-8 col-sm-12 border-right-2">
+        <h3 class="content-title">Patient Details</h3>
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="row">
+                <span class="detail-title">Name</span>
+            </div>
+            <div class="row">
+                <span>{{data.patientDetails.patientName}}</span>
+            </div>
+            <br>
+            <div class="row">
+                <span class="detail-title">Date of Birth</span>
+            </div>
+            <div class="row">
+                <span>{{data.patientDetails.patientDob | date:'dd-MMM-yyyy'}}</span>
+            </div>
+            <br>
+            <div class="row">
+                <span class="detail-title">Address</span>
+            </div>
+            <div class="row">
+                <span>{{data.patientDetails.streetName}} {{data.patientDetails.city}} {{data.patientDetails.state}} {{data.patientDetails.zipCode}}</span>
+            </div>
+            <br>
+            <div class="row">
+                <span class="detail-title">Caregivers</span>
+            </div>
+            <div ng-repeat="careGiver in data.patientCaregiversList" class="row">
+                <span>{{careGiver.email}}</span>
+            </div>
+
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="row">
+                <span class="detail-title">Patient ID</span>
+            </div>
+            <div class="row">
+                <span>{{data.patientDetails.patientId}}</span>
+            </div>
+            <br>
+            <div class="row">
+                <span class="detail-title">Contact Number</span>
+            </div>
+            <div class="row">
+                <span>{{data.patientDetails.patientPhone}}</span>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="row">
+            <img src="img/profile_pic.png" class="img-circle pull-right patient-picture" alt="Profile Pic" width="45px" height="45px">
+        </div>
+        <br>
+        <div class="row padding-left-right-20">
+            <span>Invite a caregiver to monitor adherence of</span> <span class="content-title">{{data.patientDetails.patientName}}</span>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="input-group input-group-lg caregiver-add-text">
+            <span class="input-group-addon" ng-click="addCaregiver()">
+                <img src="img/caregiver_icon.png" height="25px" class="img-rounded pull-left"
+                     alt="Profile Pic">
+            </span>
+                <form ng-submit="addCaregiver()">
+                    <input type="text" class="form-control" name="caregiverEmail" placeholder="Enter caregiver Email" ng-model="data.caregiverEmailAddress">
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <button class="btn btn-lg center-block btn-caregiver-add" ng-click="addCaregiver();">Invite Caregiver</button>
+        </div>
+
+    </div>
+</div>
+
+<br>
+
+<div ng-if="isDetailView" class="container container-pat-device-info">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <h3 class="content-title">Device Information</h3>
+        <span>Enter MAC address of the device you wish to add</span>
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="tbl-container">
+                <br>
+                <table class="table">
+                    <thead class="tbl-header">
+                    <tr>
+                        <td>Mac Address</td>
+                        <td>Type</td>
+                        <td>Status</td>
+                        <td>Last Ping</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tbl-body-tr" ng-repeat="device in data.patientDeviceList">
+                            <td>{{device.macAddress}}</td>
+                            <td>{{device.deviceTypeString}}</td>
+                            <td ng-if="device.active">
+                                <img src="img/signal-green.png" height="25px" class="img-rounded"  alt="Pic">
+                            </td>
+                            <td ng-if="!device.active">
+                                <img src="img/signal-red.png" height="25px" class="img-rounded" alt="Pic">
+                            </td>
+                            <td>{{device.pingDateTime}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-if="!showLoading">
+
+                    <div ng-if="!data.patientDeviceList || data.patientDeviceList.length === 0" class="div-no-devices">
+                        <p>No devices available</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <select placeholder="Device Type" class="form-control" id="sel1" ng-model="data.deviceType" >
+                    <option value="smart-communicator">smart-communicator</option>
+                    <option value="fsbl">blister-pack</option>
+                    <option value="not-available">blood-pressure-monitor</option>
+                    <option value="not-available">heart-rate-monitor</option>
+                    <option value="not-available">pulse-monitor</option>
+                </select>
+            </div>
+            <!--<div class="col-lg-2 col-md-2 col-sm-6">
+                <input class="radio-device-type" type="radio" name="optradio" value="fsbl" ng-model="data.deviceType">
+                <span>Blister Pack</span>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <input class="radio-device-type" type="radio" name="optradio" value="smart_communicator" ng-model="data.deviceType">
+                <span>Smart Communicator</span>
+            </div>-->
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <form ng-submit="mapDevice()">
+                    <input type="text" class="form-control" name="caregiverId" placeholder="Enter MAC Address" ng-model="data.deviceMacAddress">
+                </form>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <button class="btn btn-lg center-block btn-device-add" ng-click="mapDevice();">Add Device</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<br>
+
+<div ng-if="isDetailView" class="container container-pat-details">
+    <div class="col-lg-8 col-md-8 col-sm-12 border-right-2">
+        <h3 class="content-title">Medication Schedule</h3>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <span>Enter File No to search medication schedule</span>
+            </div>
+        </div>
+
+        <br>
+        <div ng-if="data.patientActiveMedication && data.patientActiveMedication.fileNumber" class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="row">
+                        <span class="detail-title">File Number</span>
+                    </div>
+                    <div class="row">
+                        <span>{{data.patientActiveMedication.fileNumber}}</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="row">
+                        <span class="detail-title">Scheduled Period</span>
+                    </div>
+                    <div class="row">
+                        <span>{{data.patientActiveMedication.startDate | date:'dd-MMM'}} {{data.patientActiveMedication.endDate | date:'dd-MMM'}}</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <img src="img/search_hover.png" class="img-circle" alt="Profile Pic" width="25px" height="25px" ns-popover
+                         ns-popover-template="popover"
+                         ns-popover-trigger="click"
+                         ns-popover-placement="top">
+                </div>
+            </div>
+        </div>
+        <div ng-if="!showLoading">
+            <div ng-if="!data.patientActiveMedication" class="div-no-devices text-center">
+                <p>No active medication available</p>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <br>
+        <div class="row">
+            <div class="input-group input-group-lg caregiver-add-text">
+            <span class="input-group-addon" ng-click="addCaregiver()">
+                <img src="img/blister_pack_grey.png" height="25px" class="img-rounded pull-left"
+                     alt="Profile Pic">
+            </span>
+                <form ng-submit="addMedicationNumber()">
+                    <input type="text" class="form-control" name="caregiverId" placeholder="Enter File No" ng-model="data.medicationFileNumber">
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <button class="btn btn-lg center-block btn-caregiver-add" ng-click="addMedicationNumber();">Add Schedule</button>
+        </div>
+
+    </div>
+</div>
+
+<br>
+<br>
+<script type="text/ng-template" id="popover">
+    <div ng-if="data.patientActiveMedication.blisters" class="container">
+        <div class="row">
+            <div ng-repeat="blister in data.patientActiveMedication.blisters" class="col-md-3 div-padding-2">
+                <div ng-class="blister.time">
+                    <div ng-if="!blister.skip">
+                        <div class="row div-margin-5">
+                            <b class="patient-name">{{patientName}}</b>
+                        </div>
+                        <div class="row div-margin-5">
+                            <b>{{blister.date}}</b>
+                            <b style="float:right">{{blister.time}}</b>
+                        </div>
+                        <div ng-repeat="medication in blister.medications" class="row div-margin-5">
+                            {{medication.quantity}} {{medication.drug}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul ng-if="!data.patientActiveMedication.blisters">
+        <li><a>Data not found</a></li>
+    </ul>
+</script>
+
+
+
+
+
+<style>
+
+
+    .main-background {
+    background-image: url(img/blur-web-bg.jpg)  !important;
+        background-repeat: no-repeat;
+        background-size: cover !important;
+    }
+
+    .div-display-inline {
+    display: inline-block;
+    }
+
+    .patient-name {
+    font-size: 18px;
+    }
+
+    .Morning {
+    background-color: #FFFF00;
+    height: 150px;
+    }
+
+    .Noon {
+    background-color: #E0E0E0;
+    height: 150px;
+    }
+
+    .Evening {
+    background-color: #FF9900;
+    height: 150px;
+    }
+
+    .Bedtime {
+    background-color: #30B5EF;
+    height: 150px;
+    }
+
+    .div-padding-2 {
+    padding: 2px;
+    }
+
+    .div-margin-5 {
+    margin: 5px;
+    }
+
+    .no-left-margin {
+    margin-left: 0px !important;
+    }
+
+</style>
+
+
+
+

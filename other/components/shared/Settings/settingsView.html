@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp.settingsCtrl" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp.settingsCtrl" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp.settingsCtrl" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp.settingsCtrl" class="no-js"> <!--<![endif]-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Cardinal Hector</title>
+</head>
+<body>
+
+<div class="content_div" ng-controller="SettingsCtrl" md-theme="blueTheme" ng-init="getSettings()">
+
+    <!--<div class="triangle"></div>-->
+    <div class="ns-popover-tooltip">
+
+        <center>
+
+        <ul style="list-style: none;">
+
+            <li>
+                <table>
+                    <tr>
+                        <td class="td-settings" width="70%" style="padding-left: 5%">
+                            {{settings[0].name}}
+                        </td>
+                        <td width="30%">
+                            <md-switch ng-disabled="settings[0].disabled" ng-model="settings[0].value" ng-click="updateSettings(settings[0].id, !settings[0].value , $event)" class=" md-primary md-switch-settings"></md-switch>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+
+            <md-divider></md-divider>
+
+            <li>
+                <table>
+                    <tr>
+                        <td class="td-settings" width="70%" style="padding-left: 5%">
+                            {{settings[1].name}}
+                        </td>
+                        <td width="30%">
+                            <md-switch ng-disabled="settings[1].disabled" ng-model="settings[1].value" ng-click="updateSettings(settings[1].id, !settings[1].value ,  $event)"  class="md-primary md-switch-settings"></md-switch>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+
+            <md-divider></md-divider>
+
+            <li>
+                <table>
+                    <tr>
+                        <td class="td-settings" width="70%" style="padding-left: 5%">
+                            {{settings[2].name}}
+                        </td>
+                        <td width="30%" >
+                            <md-switch  ng-disabled="settings[2].disabled" ng-model="settings[2].value" ng-click="updateSettings(settings[2].id, !settings[2].value, $event)"  class="md-primary md-switch-settings"></md-switch>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+        </ul>
+
+
+            <!-- <button class="btn btn-lg" style="margin-left: 5%;margin-right: 5%;width:90%;" ng-click="hidePopover()">close x</button>-->
+        </center>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+
+<style>
+    .td-settings{
+        font-weight: bold;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        color: #95A0AA;
+    }
+
+</style>
+

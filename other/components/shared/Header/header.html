@@ -1,0 +1,115 @@
+<header class="main-header">
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav style="background-color: #30b5ef;" class="no-left-margin navbar navbar-static-top" role="navigation">
+
+                 <span style="background-color: black;" class="logo">
+                     <!-- mini logo for sidebar mini 50x50 pixels -->
+                     <span class="logo-mini"><b>C</b>Hec</span>
+                     <!-- logo for regular state and mobile devices -->
+                     <span class="logo-lg"><b>Hector</b></span>
+                 </span>
+
+
+                <span>
+                     <span class="portal-header">{{data.screenTitle}}</span>
+                </span>
+
+        <!-- Navbar Right Menu -->
+
+        <div class="navbar-custom-menu" ng-app="myApp.headerCtrl" ng-controller="HeaderCtrl">
+            <ul class="nav navbar-nav">
+                <!-- Messages: style can be found in dropdown.less-->
+                <li class="dropdown messages-menu">
+                    <div ng-if="showUserIcon" class="col-md-12 ns-scope" style="top:4px;"
+
+                         ns-popover
+                         ns-popover-template="tooltipProfile"
+                         ns-popover-trigger="click"
+                         ns-popover-theme="ns-popover-tooltip-theme"
+                         ns-popover-hide-on-inside-click="false"
+                         ns-popover-hide-on-outside-click="true"
+                         ns-popover-hide-on-button-click="true"
+                         ns-popover-timeout="3"
+                         ns-popover-placement="bottom"
+                    >
+                        <div class="col-md-12"><img src="img/profile_pic.png" class="img-circle user-img" alt="Profile Pic" width="25px" height="25px"></div>
+                        <div class="col-md-12 user-name">{{data.userName}} &#9660;</div>
+                    </div>
+                </li>
+
+
+                <!-- Tasks: style can be found in dropdown.less -->
+                <li class="dropdown tasks-menu">
+                    <div  ng-if="showSettings" class="col-md-12 ns-scope" style="top:9px; width: 150px;"
+
+                         ns-popover
+                         ns-popover-template="tooltipSettings"
+                         ns-popover-trigger="click"
+                         ns-popover-theme="ns-popover-tooltip-theme"
+                         ns-popover-hide-on-inside-click="false"
+                         ns-popover-hide-on-outside-click="true"
+                         ns-popover-hide-on-button-click="true"
+                         ns-popover-timeout="3"
+                         ns-popover-placement="bottom|right"
+                    >
+                        <div class="col-md-12"><i class="glyphicon glyphicon-cog settings-img"></i></div>
+                        <div class="col-md-12 user-name">Settings</div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div style="height: 6px">
+    <div ng-if="showLoading" class="load-bar">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="tooltipSettings">
+    <div class="triangle"></div>
+    <div class="col-md-12" ng-include="'components/shared/Settings/settingsView.html'"></div>
+</script>
+
+<script type="text/ng-template" id="tooltipProfile">
+    <div class="triangle"></div>
+    <div class="" ng-include="'components/shared/Logout/logout.html'"></div>
+</script>
+
+<style>
+    .portal-header{
+        color: white;
+        padding-left:1em;
+        font-size: 1.8em;
+        display: inline-block;
+        padding: 7px 20px;
+    }
+
+    .user-img{
+        display:block;
+        margin:auto;
+    }
+
+    .user-name{
+        text-align: center;
+        color: white;
+    }
+    .settings-img{
+        display:block;
+        margin:auto;
+        font-size: large;
+        color: white;
+        width: 18px;
+        height: 18px;
+    }
+    .navbar{
+        -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.25);
+        box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.25);
+    }
+</style>
